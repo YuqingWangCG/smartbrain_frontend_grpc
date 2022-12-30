@@ -70,7 +70,7 @@ onInputChange = (event)=>{
 
 // what will happen when we click Detect
 onPictureSubmit = () => {
-    fetch('http://localhost:3002/imageurl', {
+    fetch('https://smartbrain-yuqingslab-api.onrender.com/imageurl', {
             method:'post',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({
@@ -81,7 +81,7 @@ onPictureSubmit = () => {
     .then(result => result.json())
     .then((result) => {
       if (result) {
-        fetch('http://localhost:3002/image', {
+        fetch('https://smartbrain-yuqingslab-api.onrender.com/image', {
             method:'put',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({

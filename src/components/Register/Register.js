@@ -25,7 +25,7 @@ class Register extends React.Component {
 	}
 
 	onSubmitRegiester = () =>{
-		fetch('http://localhost:3002/register', {
+		fetch('https://smartbrain-yuqingslab-api.onrender.com/register', {
 			method:'post',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({
