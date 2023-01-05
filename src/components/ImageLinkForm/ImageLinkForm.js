@@ -5,7 +5,7 @@ const ImageLinkForm = ({onInputChange, onPictureSubmit}) => {
 	return(
 		<div>
 			<p className='f3'>
-			  {`This Smart Brain will detect faces in your pictures. Let's give it a try!`}
+			  {`This Smart Brain will detect face in your pictures. Let's give it a try!`}
 			</p>
             <div className='backgroundpattern pa4 br3 shadow-5 center' style={{width:'700px'}}>
                <input className='f4 pa2 w-70' type='text' onChange={onInputChange}/>
