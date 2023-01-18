@@ -115,7 +115,7 @@ onRouteChange = (route) => {
     return (
       <div className="App">
         <ParticlesBg type="cobweb" bg={true} />
-        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
+        <Navigation route={route} onRouteChange={this.onRouteChange}/>
         {route ==='home'
           ? 
           <div>
