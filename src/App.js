@@ -101,13 +101,12 @@ onPictureSubmit = () => {
 }
 
 onRouteChange = (route) => {
+  this.setState({route:route});
   if (route === 'signout'){
     this.setState(initialState)
   } else if (route === 'home') {
     this.setState({isSignedIn:true})
   }
-
-  this.setState({route:route});
 }
 
 
@@ -129,7 +128,7 @@ onRouteChange = (route) => {
             <FaceRecognition box = {box} inputURL={input}/>
           </div>
           : (
-             route ==='signin'
+             route ==='signin' || 'signout'
               ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
               : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
             )
