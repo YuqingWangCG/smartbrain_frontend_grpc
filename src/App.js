@@ -97,7 +97,8 @@ onPictureSubmit = () => {
           })
         .catch(console.log)
         }
-      this.displayFaceBox(this.calculateFaceLocation(result))
+        console.log(result.regions[...].region_info.bounding_box)
+      // this.displayFaceBox(this.calculateFaceLocation(result))
     })
     .catch((error) => console.log("error", error));
 }
