@@ -11,7 +11,7 @@ const ImageLinkForm = ({inputURL, onInputChange, onPictureSubmit, onClearSubmit}
                <input 
                	className='f4 pa2 w-60' 
                	type='text' 
-               	placeholder='Please paste a jpg link of your picture:' 
+               	placeholder='Please paste a url link of your picture:' 
                	value={inputURL} 
                	onChange={onInputChange}/>
                <button 
