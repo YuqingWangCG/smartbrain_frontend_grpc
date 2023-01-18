@@ -4,7 +4,7 @@
     font-weight: normal;
     src: local('Mamba Regular'), url('Mamba Ice Cream 1.woff') format('woff');
     }*/
-    
+
 @font-face {
     font-family: 'Sansita Regular';
     font-style: normal;
@@ -15,7 +15,7 @@
 
 body {
   margin: 0;
-  font-family: 'Sansita Regular;
+  font-family: 'Sansita Regular';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(to right, rgb(62, 223, 245), rgb(248, 96, 209));
