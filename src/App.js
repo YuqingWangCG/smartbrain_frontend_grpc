@@ -126,6 +126,7 @@ onClearSubmit = ()=>{
             <Logo />
             <Rank username={this.state.user.username} entries={this.state.user.entries}/>
             <ImageLinkForm 
+            inputURL={input}
             onInputChange={this.onInputChange} 
             onPictureSubmit={this.onPictureSubmit}
             onClearSubmit={this.onClearSubmit}
