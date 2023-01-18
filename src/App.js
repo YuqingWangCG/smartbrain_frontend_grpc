@@ -102,9 +102,9 @@ onPictureSubmit = () => {
 
 onRouteChange = (route) => {
   this.setState({route:route});
-  if (route === 'signout'){
+  if (this.state.route === 'signout'){
     this.setState(initialState)
-  } else if (route === 'home') {
+  } else if (this.state.route === 'home') {
     this.setState({isSignedIn:true})
   }
 }
