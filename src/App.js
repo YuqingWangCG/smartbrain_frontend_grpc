@@ -109,6 +109,10 @@ onRouteChange = (route) => {
   }
 }
 
+onClearSubmit = ()=>{
+  this.setState({input:''})
+  this.setState({box: {}})
+}
 
   render () {
     const {box, input, isSignedIn, route} = this.state;
@@ -124,6 +128,7 @@ onRouteChange = (route) => {
             <ImageLinkForm 
             onInputChange={this.onInputChange} 
             onPictureSubmit={this.onPictureSubmit}
+            onClearSubmit={this.onClearSubmit}
             />
             <FaceRecognition box = {box} inputURL={input}/>
           </div>
