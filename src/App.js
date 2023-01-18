@@ -120,20 +120,19 @@ onRouteChange = (route) => {
         {route ==='home'
           ? 
           <div>
-          <Logo />
-          <Rank username={this.state.user.username} entries={this.state.user.entries}/>
-          <ImageLinkForm 
-          onInputChange={this.onInputChange} 
-          onPictureSubmit={this.onPictureSubmit}
-          />
-          <FaceRecognition box = {box} inputURL={input}/>
+            <Logo />
+            <Rank username={this.state.user.username} entries={this.state.user.entries}/>
+            <ImageLinkForm 
+            onInputChange={this.onInputChange} 
+            onPictureSubmit={this.onPictureSubmit}
+            />
+            <FaceRecognition box = {box} inputURL={input}/>
           </div>
-
           : (
              route ==='signin'
-          ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-          : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
-          )
+              ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+              : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+            )
         }
       </div>
     );
