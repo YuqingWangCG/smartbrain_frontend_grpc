@@ -128,7 +128,7 @@ onRouteChange = (route) => {
             <FaceRecognition box = {box} inputURL={input}/>
           </div>
           : (
-             route ==='signin' || 'signout'
+             route ==='signin' || route ==='signout'
               ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
               : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
             )
