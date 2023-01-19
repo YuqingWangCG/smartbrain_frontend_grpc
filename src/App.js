@@ -13,7 +13,7 @@ import Register from './components/Register/Register';
 
 const initialState = {
       input : '',
-      box: {},
+      boxes: [],
       route: 'signin',
       isSignedIn: false,
       user: {
@@ -45,23 +45,37 @@ loadUser = (data) => {
 
 
 calculateFaceLocation = (data) => {
-  // const clarifaiFace= regions[...].data.concepts;
-  // const clarifaiFace= regions[...].region_info.bounding_box;
-  const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+  const boxes = [];
   const image = document.getElementById('inputImage');
   const width = Number(image.width);
   const height = Number(image.height);
- 
-  return {
-    leftCol: clarifaiFace.left_col*width,
-    topRow: clarifaiFace.top_row*height,
-    rightCol: width - (clarifaiFace.right_col*width),
-    bottomRow: height - (clarifaiFace.bottom_row*height)
-  };
+
+  console.log('data get at function', data);
+
+  const regions = data.outputs[0].data.regions;
+  console.log('regions', regions);
+
+  for (let i=0; i<regions.lengths; i++) {
+    const clarifaiFace = regions[i].region_info.bounding_box;
+    const box = {
+      leftCol: clarifaiFace.left_col*width,
+      topRow: clarifaiFace.top_row*height,
+      rightCol: width - (clarifaiFace.right_col*width),
+      bottomRow: height - (clarifaiFace.bottom_row*height)
+    }
+    boxes.push(box);
+  } 
+  return boxes;
+  // return {
+  //   leftCol: clarifaiFace.left_col*width,
+  //   topRow: clarifaiFace.top_row*height,
+  //   rightCol: width - (clarifaiFace.right_col*width),
+  //   bottomRow: height - (clarifaiFace.bottom_row*height)
+  // };
 }
 
-displayFaceBox = (box) => {
-  this.setState({box:box});
+displayFaceBoxes = (boxes) => {
+  this.setState({boxes:boxes});
 }
 
 
@@ -97,8 +111,8 @@ onPictureSubmit = () => {
           })
         .catch(console.log)
         }
-      console.log(result)
-      this.displayFaceBox(this.calculateFaceLocation(result))
+      console.log('result from api', result)
+      this.displayFaceBoxes(this.calculateFaceLocation(result))
     })
     .catch((error) => console.log("error", error));
 }
@@ -114,11 +128,11 @@ onRouteChange = (route) => {
 
 onClearSubmit = ()=>{
   this.setState({input:''})
-  this.setState({box: {}})
+  this.setState({boxes: [])
 }
 
   render () {
-    const {box, input, isSignedIn, route} = this.state;
+    const {boxes, input, isSignedIn, route} = this.state;
     return (
       <div className="App">
         <ParticlesBg type="cobweb" bg={true} />
@@ -134,7 +148,7 @@ onClearSubmit = ()=>{
             onPictureSubmit={this.onPictureSubmit}
             onClearSubmit={this.onClearSubmit}
             />
-            <FaceRecognition box = {box} inputURL={input}/>
+            <FaceRecognition boxes = {boxes} inputURL={input}/>
           </div>
           : (
              route ==='signin' || route ==='signout'
