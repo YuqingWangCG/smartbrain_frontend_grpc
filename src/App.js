@@ -45,37 +45,32 @@ loadUser = (data) => {
 
 
 calculateFaceLocation = (data) => {
-  const boxes = [];
+  let boxes = [];
   const image = document.getElementById('inputImage');
   const width = Number(image.width);
   const height = Number(image.height);
 
-  console.log('data get at function', data);
-
   const regions = data.outputs[0].data.regions;
-  console.log('regions', regions);
 
-  for (let i=0; i<regions.lengths; i++) {
-    const clarifaiFace = regions[i].region_info.bounding_box;
-    const box = {
-      leftCol: clarifaiFace.left_col*width,
-      topRow: clarifaiFace.top_row*height,
-      rightCol: width - (clarifaiFace.right_col*width),
-      bottomRow: height - (clarifaiFace.bottom_row*height)
-    }
-    boxes.push(box);
-  } 
+  boxes = regions.map((region)=>{
+    let bounding_box=region.region_info.bounding_box;
+    return (
+      {
+        leftCol:  bounding_box.left_col*width,
+        topRow: bounding_box.top_row*height,
+        rightCol: width - (bounding_box.right_col*width),
+        bottomRow: height - (bounding_box.bottom_row*height)
+      }
+    )
+  })
+
   return boxes;
-  // return {
-  //   leftCol: clarifaiFace.left_col*width,
-  //   topRow: clarifaiFace.top_row*height,
-  //   rightCol: width - (clarifaiFace.right_col*width),
-  //   bottomRow: height - (clarifaiFace.bottom_row*height)
-  // };
 }
 
 displayFaceBoxes = (boxes) => {
+  console.log('boxes from calculateFaceLocation', boxes)
   this.setState({boxes:boxes});
+  console.log(this.state.boxes);
 }
 
 
