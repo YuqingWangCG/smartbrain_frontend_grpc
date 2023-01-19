@@ -13,7 +13,7 @@ import Register from './components/Register/Register';
 
 const initialState = {
       input : '',
-      boxes: [],
+      boxes: [],   //because we want to store multiple boxes info, so use array[], each box is an Object{}
       route: 'signin',
       isSignedIn: false,
       user: {
@@ -47,14 +47,14 @@ loadUser = (data) => {
 calculateFaceLocation = (data) => {
   let boxes = [];
   const image = document.getElementById('inputImage');
-  const width = Number(image.width);
+  const width = Number(image.width); //image.width is a string
   const height = Number(image.height);
 
-  const regions = data.outputs[0].data.regions;
+  const regions = data.outputs[0].data.regions;  //regions is an array[{}, {}, ...]
 
-  boxes = regions.map((region)=>{
+  boxes = regions.map((region)=>{    //iterate through each item and return an array of Object [{}, {},...] to boxes
     let bounding_box=region.region_info.bounding_box;
-    return (
+    return (           //inside of return, its return one thing each iteration
       {
         leftCol:  bounding_box.left_col*width,
         topRow: bounding_box.top_row*height,
@@ -64,14 +64,11 @@ calculateFaceLocation = (data) => {
     )
   })
 
-  return boxes;
+  this.setState({boxes:boxes});
+  
 }
 
-displayFaceBoxes = (boxes) => {
-  console.log('boxes from calculateFaceLocation', boxes)
-  this.setState({boxes:boxes});
-  console.log(this.state.boxes);
-}
+
 
 
 // what will happen when the input is changed
@@ -106,8 +103,7 @@ onPictureSubmit = () => {
           })
         .catch(console.log)
         }
-      console.log('result from api', result)
-      this.displayFaceBoxes(this.calculateFaceLocation(result))
+      this.calculateFaceLocation(result)
     })
     .catch((error) => console.log("error", error));
 }
