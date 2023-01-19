@@ -127,8 +127,8 @@ onRouteChange = (route) => {
 }
 
 onClearSubmit = ()=>{
-  this.setState({input:''})
-  this.setState({boxes: [])
+  this.setState({input:''});
+  this.setState({boxes: []});
 }
 
   render () {
