@@ -77,7 +77,7 @@ onInputChange = (event)=>{
   }
 
 // what will happen when we click Detect
-onPictureSubmit = () => {
+onPictureSubmit = () => {      //firstly, request: input url, POST to /facedetection, handleFaceDetection, response: outputs from Clarifai API 
     fetch('https://smartbrain-yuqingslab-api.onrender.com/imageurl', {
             method:'post',
             headers:{'Content-Type':'application/json'},
@@ -87,8 +87,8 @@ onPictureSubmit = () => {
           }
         )
     .then(result => result.json())
-    .then((result) => {
-      if (result) {
+    .then((result) => {         //if the clarifai api return sth, then increase the entries.
+      if (result) {       // request:user.id, PUT to /updateentries, handleEntries, response: updated entries
         fetch('https://smartbrain-yuqingslab-api.onrender.com/image', {
             method:'put',
             headers:{'Content-Type':'application/json'},
@@ -98,7 +98,7 @@ onPictureSubmit = () => {
           }
         )
         .then(result => result.json())
-        .then(count => {
+        .then(count => {          //only update the entries, not the entire user object
           this.setState(Object.assign(this.state.user, {entries:count}))
           })
         .catch(console.log)

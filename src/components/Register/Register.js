@@ -24,7 +24,7 @@ class Register extends React.Component {
 		this.setState({password:event.target.value});
 	}
 
-	onSubmitRegiester = () =>{
+	onSubmitRegiester = () =>{ //request: username, email, password, POST to /register, handleRegister, response: user
 		fetch('https://smartbrain-yuqingslab-api.onrender.com/register', {
 			method:'post',
 			headers: {'Content-Type': 'application/json'},
