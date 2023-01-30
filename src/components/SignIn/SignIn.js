@@ -20,14 +20,13 @@ class SignIn extends React.Component {
 	}
 
 	onSignInInfoChange = (event) => {
-		if (!this.state.signInEmail|| !this.state.signInPassword) {
-			this.setState({signInInfo: 'Empty username and password!'});
-		} else {
-			this.setState({signInInfo: 'Please check your username and password again and enter them correctly!'});
-		}
+		this.setState({signInInfo: 'Please check your username and password again and enter them correctly!'});
 	}
 
 	onSubmitSignIn = () => {   //request: email, password, POST to /signin, handleSignIn, response: user
+		if (!this.state.signInEmail|| !this.state.signInPassword) {
+      		return this.setState({signInInfo: 'Empty input!'});
+    	} 
 		fetch('https://smartbrain-yuqingslab-api.onrender.com/signin', {
 			method:'post',
 			headers:{'Content-Type':'application/json'},

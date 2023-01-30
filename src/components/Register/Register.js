@@ -7,7 +7,8 @@ class Register extends React.Component {
 		this.state = {
 			username: '',
 			email: '',
-			password:''
+			password:'',
+      registerInfo: ''
 		}
 	}
 
@@ -24,8 +25,18 @@ class Register extends React.Component {
 		this.setState({password:event.target.value});
 	}
 
+  // onRegisterInfoChange = (event) => {
+  //   if (!this.state.username || !this.state.Email|| !this.state.password) {
+  //     this.setState({registerInfo: 'Empty input!'});
+  //   }
+  // }
+
 	onSubmitRegiester = () =>{ //request: username, email, password, POST to /register, handleRegister, response: user
-		fetch('https://smartbrain-yuqingslab-api.onrender.com/register', {
+		if (!this.state.username || !this.state.email|| !this.state.password) {
+      return this.setState({registerInfo: 'Empty input!'});
+    }  //can add a validation about the email must have @ and password must be...
+    
+    fetch('https://smartbrain-yuqingslab-api.onrender.com/register', {
 			method:'post',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({
@@ -39,7 +50,10 @@ class Register extends React.Component {
 			if(user.id) {
 				this.props.loadUser(user)
 				this.props.onRouteChange('home');
-			}
+			} 
+      // else {
+      //   this.onRegisterInfoChange();
+      // }
 		})
 	}
 
@@ -81,6 +95,7 @@ class Register extends React.Component {
                   onChange={this.onPasswordChange}
                 />
               </div>
+              <label className="db fw6 lh-copy f6 white">{this.state.registerInfo}</label>
             </fieldset>
             <div className="">
               <input

@@ -44,6 +44,7 @@ loadUser = (data) => {
 }
 
 
+
 calculateFaceLocation = (data) => {
   let boxes = [];
   const image = document.getElementById('inputImage');
@@ -76,8 +77,8 @@ onInputChange = (event)=>{
      this.setState({input:event.target.value});
   }
 
-// what will happen when we click Detect
-onPictureSubmit = () => {      //firstly, request: input url, POST to /facedetection, handleFaceDetection, response: outputs from Clarifai API 
+// what will happen when we click Detect: firstly, request: input url, POST to /imageurl, handleFaceDetection, response: outputs from Clarifai API 
+onPictureSubmit = () => {
     fetch('https://smartbrain-yuqingslab-api.onrender.com/imageurl', {
             method:'post',
             headers:{'Content-Type':'application/json'},
@@ -87,8 +88,8 @@ onPictureSubmit = () => {      //firstly, request: input url, POST to /facedetec
           }
         )
     .then(result => result.json())
-    .then((result) => {         //if the clarifai api return sth, then increase the entries.
-      if (result) {       // request:user.id, PUT to /updateentries, handleEntries, response: updated entries
+    .then((result) => {     //result: outputs from clarifai api
+      if (result) {
         fetch('https://smartbrain-yuqingslab-api.onrender.com/image', {
             method:'put',
             headers:{'Content-Type':'application/json'},
@@ -98,10 +99,10 @@ onPictureSubmit = () => {      //firstly, request: input url, POST to /facedetec
           }
         )
         .then(result => result.json())
-        .then(count => {          //only update the entries, not the entire user object
+        .then(count => {
           this.setState(Object.assign(this.state.user, {entries:count}))
           })
-        .catch(console.log)
+        .catch(err=>console.log('error while updating entries!!!', err))
         }
       this.calculateFaceLocation(result)
     })
