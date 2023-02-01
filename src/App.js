@@ -89,21 +89,21 @@ onPictureSubmit = () => {
         )
     .then(result => result.json())
     .then((result) => {     //result: outputs from clarifai api
-      if (result) {
-        fetch('https://smartbrain-yuqingslab-api.onrender.com/image', {
-            method:'put',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({
-              id: this.state.user.id
-            })
-          }
-        )
-        .then(result => result.json())
-        .then(count => {
-          this.setState(Object.assign(this.state.user, {entries:count}))
-          })
-        .catch(err=>console.log('error while updating entries!!!', err))
-        }
+      // if (result) {
+      //   fetch('https://smartbrain-yuqingslab-api.onrender.com/image', {
+      //       method:'put',
+      //       headers:{'Content-Type':'application/json'},
+      //       body: JSON.stringify({
+      //         id: this.state.user.id
+      //       })
+      //     }
+      //   )
+      //   .then(result => result.json())
+      //   .then(count => {
+      //     this.setState(Object.assign(this.state.user, {entries:count}))
+      //     })
+      //   .catch(err=>console.log('error while updating entries!!!', err))
+      //   }
       this.calculateFaceLocation(result)
     })
     .catch((error) => console.log("error", error));
