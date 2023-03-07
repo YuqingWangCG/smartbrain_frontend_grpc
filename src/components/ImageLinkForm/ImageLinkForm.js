@@ -5,13 +5,13 @@ const ImageLinkForm = ({inputURL, onInputChange, onPictureSubmit, onClearSubmit}
 	return(
 		<div>
 			<p className='f3'>
-			  {`This Smart Brain will detect face in your pictures. Let's give it a try!`}
+			  {`Our Smart Brain will detect faces in the picture. Let's give it a try!`}
 			</p>
             <div className='backgroundpattern pa4 br3 shadow-5 center' style={{width:'900px'}}>
                <input 
                	className='f4 pa2 w-60' 
                	type='text' 
-               	placeholder='Please paste a url link of your picture:' 
+               	placeholder='Please paste url link of a picture here:' 
                	value={inputURL} 
                	onChange={onInputChange}/>
                <button 
